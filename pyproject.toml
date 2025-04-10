@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "pharmmod"
+version = "0.0.1"
+
+authors = [
+  { name="Sundaresh Sankaran", email="sundaresh.sankaran@sas.com" },
+]
+description = "A package containing a Python class and associated methods to facilitate data mining and analytics."
+readme = "README.md"
+requires-python = ">=3.11, <3.13"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/SundareshSankaran/pharmmodel_class"
+Issues = "https://github.com/SundareshSankaran/pharmmodel_class/issues"

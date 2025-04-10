@@ -1,0 +1,13 @@
+requests
+jupyter
+ipykernel
+pandas
+ydata_profiling
+swat
+scikit-learn
+matplotlib
+seaborn
+plotly
+optbinning
+statsmodels
+xgboost
