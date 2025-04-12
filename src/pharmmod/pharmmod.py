@@ -418,7 +418,7 @@ class PharmMod:
         from sasviya.ml.tree import DecisionTreeClassifier
         from sklearn.metrics import f1_score, ConfusionMatrixDisplay, confusion_matrix
         import matplotlib.pyplot as plt
-        model = DecisionTreeClassifier(random_state=42)
+        model = DecisionTreeClassifier()
         train = self.dataframes[1]
         valid = self.dataframes[2]
         test = self.dataframes[3]
