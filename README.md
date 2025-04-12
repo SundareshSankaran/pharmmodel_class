@@ -33,3 +33,7 @@ pip install  -e .
 ## Contact
 - [Sundaresh Sankaran](mailto:sundaresh.sankaran@sas.com)
 - [Samiul Haque](mailto:samiul.haque@sas.com)
+
+## Version
+- Version 0.1.0
+  - Initial push
