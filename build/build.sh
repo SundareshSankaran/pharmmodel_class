@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-python -m venv pharmmod
+python -m venv --system-site-packages pharmmod
 . pharmmod/bin/activate
 
 pip install --upgrade pip uv

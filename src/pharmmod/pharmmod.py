@@ -328,12 +328,94 @@ class PharmMod:
             "target": target,
             "features": col
         }
+
+    def sas_gradboost_classifier(self, target=None, col=[]):
+        """This function fits an XGBoost classifier to the training data"""
+        from sasviya.ml.tree import GradientBoostingClassifier
+        from sklearn.metrics import f1_score, ConfusionMatrixDisplay, confusion_matrix
+        import matplotlib.pyplot as plt
+        
+        model = GradientBoostingClassifier(random_state=42)
+        train = self.dataframes[1]
+        valid = self.dataframes[2]
+        test = self.dataframes[3]
+        
+        if target is None:
+            target = self.target
+        
+        if len(col) == 0:
+            col = train.drop(target, axis=1).columns
+        
+        model.fit(train[col], train[target])
+        validation_f1_score = round(100*f1_score(valid[target], model.predict(valid[col])),2)
+        training_f1_score = round(100*f1_score(train[target], model.predict(train[col])),2)
+        test_f1_score = round(100*f1_score(test[target], model.predict(test[col])),2)
+        print('Training F1 Score:', training_f1_score)
+        print('Validation F1 Score:', validation_f1_score)
+        print('Test F1 Score:', round(100*f1_score(test[target], model.predict(test[col])),2))
+        fig, axs = plt.subplots(ncols=2, figsize=(16,5))
+        disp = ConfusionMatrixDisplay(confusion_matrix(valid[target], model.predict(valid[col]), normalize='true'))
+        disp.plot(cmap=plt.cm.Blues, ax=axs[0])
+        axs[0].set_title('Validation Confusion Matrix')
+        disp = ConfusionMatrixDisplay(confusion_matrix(test[target], model.predict(test[col]), normalize='true'))
+        disp.plot(cmap=plt.cm.Blues, ax=axs[1])
+        axs[1].set_title('Test Confusion Matrix')
+        plt.show()
+        
+        model_package = {
+            "model_type": "SAS Gradient Boosting Classifier",
+            "model": model,
+            "Training F1": training_f1_score,
+            "Validation F1": validation_f1_score,
+            "Test F1": test_f1_score,
+            "target": target,
+            "features": col
+        }
         
         self.models_run.append(model_package)
 
     def decision_tree_classifier(self, target=None, col=[]):
         """This function fits a decision tree classifier to the training data"""
         from sklearn.tree import DecisionTreeClassifier
+        from sklearn.metrics import f1_score, ConfusionMatrixDisplay, confusion_matrix
+        import matplotlib.pyplot as plt
+        model = DecisionTreeClassifier(random_state=42)
+        train = self.dataframes[1]
+        valid = self.dataframes[2]
+        test = self.dataframes[3]
+        if target is None:
+            target = self.target
+        if len(col) == 0:
+            col = train.drop(target, axis=1).columns
+        model.fit(train[col], train[target])
+        validation_f1_score = round(100*f1_score(valid[target], model.predict(valid[col])),2)
+        training_f1_score = round(100*f1_score(train[target], model.predict(train[col])),2)
+        test_f1_score = round(100*f1_score(test[target], model.predict(test[col])),2)
+        print('Training F1 Score:', training_f1_score)
+        print('Validation F1 Score:', validation_f1_score)
+        print('Test F1 Score:', round(100*f1_score(test[target], model.predict(test[col])),2))
+        fig, axs = plt.subplots(ncols=2, figsize=(16,5))
+        disp = ConfusionMatrixDisplay(confusion_matrix(valid[target], model.predict(valid[col]), normalize='true'))
+        disp.plot(cmap=plt.cm.Blues, ax=axs[0])
+        axs[0].set_title('Validation Confusion Matrix')
+        disp = ConfusionMatrixDisplay(confusion_matrix(test[target], model.predict(test[col]), normalize='true'))
+        disp.plot(cmap=plt.cm.Blues, ax=axs[1])
+        axs[1].set_title('Test Confusion Matrix')
+        plt.show()
+        model_package = {
+            "model_type": "Decision Tree Classifier",
+            "model": model,
+            "Training F1": training_f1_score,
+            "Validation F1": validation_f1_score,
+            "Test F1": test_f1_score,
+            "target": target,
+            "features": col
+        }
+        self.models_run.append(model_package)
+
+    def sas_decision_tree_classifier(self, target=None, col=[]):
+        """This function fits a decision tree classifier to the training data"""
+        from sasviya.ml.tree import DecisionTreeClassifier
         from sklearn.metrics import f1_score, ConfusionMatrixDisplay, confusion_matrix
         import matplotlib.pyplot as plt
         model = DecisionTreeClassifier(random_state=42)
