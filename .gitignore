@@ -1,1 +1,5 @@
 /.DS_Store
+/build/pharmmod
+/examples/.ipynb_checkpoints
+/src/pharmmod.egg-info
+/src/pharmmod/__pycache__

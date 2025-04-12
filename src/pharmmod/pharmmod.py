@@ -249,7 +249,7 @@ class PharmMod:
         from sklearn.metrics import f1_score, ConfusionMatrixDisplay, confusion_matrix
         import matplotlib.pyplot as plt
         
-        model = XGBClassifier(use_label_encoder=False, eval_metric='logloss', random_state=42)
+        model = XGBClassifier(use_label_encoder=True, eval_metric='logloss', random_state=42)
         train = self.dataframes[1]
         valid = self.dataframes[2]
         test = self.dataframes[3]
