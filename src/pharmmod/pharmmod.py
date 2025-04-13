@@ -155,24 +155,17 @@ class PharmMod:
             for j in range(1, len(self.dataframes)):
                 self.dataframes[j][f"{i}_le"] = le.transform(self.dataframes[j][i])
         
-    def forest_classifier(self, target=None, col=[]):
-        """This function fits a random forest classifier to the training data"""
-        # from sasviya.ml.tree import ForestClassifier
-        from sklearn.ensemble import RandomForestClassifier as ForestClassifier
+    def run_model(self, model, target= None, col=[]):
+        """This function runs the model on the training data"""
         from sklearn.metrics import f1_score, ConfusionMatrixDisplay, confusion_matrix
         import matplotlib.pyplot as plt
-        
-        model = ForestClassifier(random_state=42)
         train = self.dataframes[1]
         valid = self.dataframes[2]
         test = self.dataframes[3]
-        
         if target is None:
             target = self.target
-        
         if len(col) == 0:
             col = train.drop(target, axis=1).columns
-        
         model.fit(train[col], train[target])
         validation_f1_score = round(100*f1_score(valid[target], model.predict(valid[col])),2)
         training_f1_score = round(100*f1_score(train[target], model.predict(train[col])),2)
@@ -188,8 +181,8 @@ class PharmMod:
         disp.plot(cmap=plt.cm.Blues, ax=axs[1])
         axs[1].set_title('Test Confusion Matrix')
         plt.show()
-        model_package = {
-            "model_type": "Random Forest Classifier",
+        return {
+            "model_type": "Model Run",
             "model": model,
             "Training F1": training_f1_score,
             "Validation F1": validation_f1_score,
@@ -197,6 +190,15 @@ class PharmMod:
             "target": target,
             "features": col
         }
+
+
+    def forest_classifier(self, target=None, col=[]):
+        """This function fits a random forest classifier to the training data"""
+        # from sasviya.ml.tree import ForestClassifier
+        from sklearn.ensemble import RandomForestClassifier as ForestClassifier
+        model = ForestClassifier(random_state=42)
+        model_package = self.run_model(model, target, col)
+        model_package ["model_type"] = "Random Forest Classifier",
         self.models_run.append(model_package)
 
 
