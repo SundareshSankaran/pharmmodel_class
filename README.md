@@ -1,8 +1,10 @@
 # PHARMMODEL
 
-An extensible Python class for analytics and data science.
+An example of an extensible Python class for analytics and data science.
 
 This repository has been developed for the purpose of facilitating a PharmaSUG 2025 paper on "Building Extensible Python Classes: It's Easier Than You Think!" Refer [here](https://pharmasug.org/conferences/pharmasug-2025-us/paper-presentations/#OS-364) for paper details.
+
+The class object in this repository is provided only as an *example* of how a common framework can help simplify interaction with multiple Python packages in data science.  It is neither meant as an endorsement of any of the packages accessed by this class, nor as an opinion on any other package which is not yet covered by this class.
 
 ## Abstract
 
@@ -18,7 +20,7 @@ git clone https://github.com/SundareshSankaran/pharmmodel_class.git
 
 2. Optional : You may like to construct a virtual environment (instructions provided in [build.sh](./build/build.sh)) to install  package
 
-3. Install the packages listed under [requirements.txt](./build/requirements.txt) in the [build](./build/) folder
+3. Install the packages listed under [requirements.txt](./build/requirements.txt) in the [build](./build/) folder.  
 
 ```
 pip install -r ./build/requirements.txt
@@ -29,6 +31,12 @@ pip install -r ./build/requirements.txt
 ```
 pip install  -e .
 ```
+
+## Useful References
+
+1. [Documentation on sasviya.ml package capabilities](https://go.documentation.sas.com/doc/en/workbenchcdc/default/explore/titlepage.htm) - this is a proprietary package surfaced as a Python programming API in SAS Viya Workbench(r) and also configurable on SAS Viya(r). 
+    - Note that methods with a prefix of *sas_* in the pharmmod class example work only within the above Viya environments.
+2. [Documentation for scikit-learn](https://scikit-learn.org/stable/user_guide.html) a popular Python package for data science, which is used for some operations described in the current example. 
 
 ## Contact
 - [Sundaresh Sankaran](mailto:sundaresh.sankaran@sas.com)
