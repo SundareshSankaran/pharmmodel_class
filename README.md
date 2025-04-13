@@ -43,5 +43,5 @@ pip install  -e .
 - [Samiul Haque](mailto:samiul.haque@sas.com)
 
 ## Version
-- Version 0.2.3
-  - Common run_model()
+- Version 0.2.4
+  - Pickling, save and load

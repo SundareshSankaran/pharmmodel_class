@@ -34,6 +34,19 @@ class PharmMod:
         self.target = target if target else self.target
         self.models_run = models_run if models_run else self.models_run
 
+    def path_check(self, path):
+        """This function checks if the path provided is a directory or a file, extension of a file and if it exists"""
+        import os
+        if not os.path.exists(path):
+            return {"exists":False, "is_dir":False, "is_file":False, "extn":None, "dir":None, "filename":None}
+        else:
+            if os.path.isdir(path):
+                return {"exists":True, "is_dir":True, "is_file":False, "extn":None,"dir":path, "filename":None}
+            elif os.path.isfile(self.path):
+                dir_name = os.path.dirname(path)
+                filename, extn = os.path.splitext(path)
+                return {"exists":True, "is_dir":False, "is_file":True, "extn":extn,"dir":dir_name,"filename":filename}
+            
     def read_data(self, path=None):
         """This function reads data from the path provided and returns a pandas dataframe"""
         import pandas as pd
@@ -263,3 +276,25 @@ class PharmMod:
         model_package ["model_type"] = model_type
         self.models_run.append(model_package)
 
+    def save(self, path=None):
+        """This function saves the PharmMod class object to the path provided"""
+        import pickle
+        import os
+        path_check = self.path_check(path)
+        if path_check["extn"] == ".pkl":
+            if path_check["exists"] == False:
+                with open(path, 'wb') as f:
+                    pickle.dump(self, f)
+
+    def load(self, path=None):
+        """This function loads the PharmMod class object from the path provided"""
+        import pickle
+        path_check = self.path_check(path)
+        if path_check["extn"] == ".pkl":
+            with open(path, 'rb') as f:
+                self = pickle.load(f)
+            return self
+        else:
+            print("Unsupported file format")
+            return None        
+        

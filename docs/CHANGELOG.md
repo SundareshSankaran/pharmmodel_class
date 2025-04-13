@@ -10,3 +10,4 @@
 |0.2.1|Prototype SAS Logistic regression added| | 13-APR-2025|
 |0.2.2|Test Run_Model function| | 13-APR-2025|
 |0.2.3|Run_Model Incorporated|From 539 -> 264 lines improvement | 13-APR-2025|
+|0.2.4|Pickling, path check, save and load methods| | 13-APR-2025|
