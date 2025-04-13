@@ -495,7 +495,7 @@ class PharmMod:
         }
         self.models_run.append(model_package)
 
-   def sas_logistic_regression(self, target=None, col=[]):
+    def sas_logistic_regression(self, target=None, col=[]):
         """This function fits a SAS Support Vector Machine-based classifier to the training data"""
         from sasviya.ml.linear_model import LogisticRegression
         from sklearn.metrics import f1_score, ConfusionMatrixDisplay, confusion_matrix
