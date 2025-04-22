@@ -117,6 +117,30 @@ class PharmMod:
             ax.set_title(columns[i])
         plt.tight_layout()
         plt.show()
+
+    def visualize_category(self, col=[], partition_indicator=0, cardinality_threshold=10):
+        """This function visualizes the categorical columns in the dataframe"""
+        import matplotlib.pyplot as plt
+        df_data = self.dataframes[partition_indicator]
+        if len(col) > 0:
+            df_data = df_data[col]
+        columns = list(df_data.columns)
+        for column in columns:
+            if df_data[column].nunique() > cardinality_threshold:
+                print(f"Column {column} has more than {cardinality_threshold} unique values. Please select a different column.")
+                columns.remove(column)
+            else:
+                labels = df_data[column].value_counts().index
+                values = df_data[column].value_counts().values
+                fig, axs = plt.subplots(1, 2, figsize=(12, 6))
+                axs[0].pie(values, labels=labels, autopct='%1.1f%%', startangle=140)
+                axs[0].set_title(f'{df_data[column].name} Distribution (Pie Chart)')
+                axs[1].bar(labels, values)
+                axs[1].set_title(f'{df_data[column].name} Distribution (Bar Chart)')
+                axs[1].set_xlabel(df_data[column].name)
+                axs[1].set_ylabel('Count')
+                plt.tight_layout()
+                plt.show()
     
     def corr(self,partition_indicator=0, col = []):
         """This function returns the correlation matrix of the dataframe"""
